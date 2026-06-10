@@ -38,20 +38,20 @@
   },
   "infoFields": {
     "info1": {
-      "label": "Info 1"
+      "label": "Abstract"
     },
     "info2": {
-      "label": "Info 2"
+      "label": ""
     },
     "info3": {
-      "label": "Info 3"
+      "label": ""
     }
   },
   "branding": {
-    "favicon": "assets/uploads/signpost-2.svg"
+    "favicon": "assets/uploads/collection.svg"
   },
   "colors": {
-    "primaryAccent": "#8F250C",
+    "primaryAccent": "#F54927",
     "secondaryAccent": "#EF8A17"
   }
 }
