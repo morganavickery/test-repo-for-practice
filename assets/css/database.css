@@ -1,0 +1,971 @@
+/*-------------------------------------------------------------------
+  # GENERAL STYLES
+-------------------------------------------------------------------*/
+
+:root {
+  --color-background: #ffffff;
+  --color-surface: #FBF8C5;
+  --color-surface-strong: #D3D0CB;
+  --color-text: #071013;
+  --color-heading: #071013;
+  --color-muted: #33392D;
+  --color-primary-accent: #8F250C;
+  --color-secondary-accent: #EF8A17;
+  --color-contrast: #ffffff;
+  --color-hero-text: #ffffff;
+  --color-card-background: #ffffff;
+  --color-tag-background: rgba(211, 208, 203, 0.5);
+
+  --default-font: "Lato", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial, "Noto Sans", "Liberation Sans", sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  --heading-font: "Raleway", sans-serif;
+  --nav-font: "Lato", sans-serif;
+
+  --color-accent: var(--color-secondary-accent);
+  --color-accent-strong: var(--color-primary-accent);
+
+  --background-color: var(--color-background);
+  --surface-color: var(--color-surface);
+  --default-color: var(--color-text);
+  --heading-color: var(--color-heading);
+  --accent-color: var(--color-accent);
+  --contrast-color: var(--color-contrast);
+  --offwhite: var(--color-surface);
+  --grey: var(--color-muted);
+  --offblack: var(--color-text);
+  --sienna: var(--color-primary-accent);
+  --timberwolf: var(--color-surface-strong, var(--color-surface));
+  --tangerine: var(--color-secondary-accent);
+  --charcoal: var(--color-heading);
+
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  color: var(--default-color);
+  font-family: var(--default-font);
+  background-color: var(--background-color);
+}
+
+a {
+  color: var(--accent-color);
+  text-decoration: none;
+  transition: 0.3s ease;
+}
+
+a:hover,
+a:focus {
+  color: color-mix(in srgb, var(--accent-color), transparent 25%);
+  text-decoration: none;
+}
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: var(--heading-font);
+  font-weight: 600;
+  color: var(--heading-color);
+}
+
+p,
+li,
+span {
+  font-family: var(--default-font);
+  font-weight: 400;
+  color: inherit;
+}
+
+section,
+.section {
+  color: var(--default-color);
+  background-color: var(--background-color);
+  padding: 40px;
+  overflow: clip;
+}
+
+.section .content-container {
+  padding: 10px;
+}
+
+@media (min-width: 1200px) {
+  body.database-page main {
+    margin-left: 0;
+  }
+}
+
+/* Light and Dark Theme Adjustments */
+.light-background {
+  --background-color: color-mix(in srgb, var(--accent-color) 20%, transparent);
+  --surface-color: var(--offwhite);
+}
+
+.dark-background {
+  --background-color: var(--sienna);
+  --contrast-color: var(--color-contrast);
+  --default-color: var(--contrast-color);
+  --heading-color: var(--contrast-color);
+  --surface-color: color-mix(in srgb, var(--sienna) 70%, black 10%);
+}
+
+/*-------------------------------------------------------------------
+HERO SECTION
+-------------------------------------------------------------------*/
+
+.database-hero {
+  width: 100%;
+  min-height: 20vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end; /* Anchor content to the bottom */
+  align-items: center;
+  overflow: hidden;
+  position: relative;
+  z-index: 1;
+  padding: 0;
+}
+
+.hero {
+  position: relative; /* Ensures it behaves normally */
+  z-index: 1;
+}
+
+
+/* Ensure the hero title is at the bottom of the container */
+.database-hero .container {
+  position: relative;
+  z-index: 3;
+  color: var(--color-hero-text);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end; /* Push title to the bottom */
+  gap: 20px;
+  text-align: center;
+  padding: 20px;
+  height: 100%;
+  flex: 1 1 auto;
+}
+
+.database-hero .hero-title {
+  font-size: 2.5rem;
+  font-weight: 600;
+  margin: 0;
+}
+
+.database-hero .hero-subtitle {
+  font-size: 1.125rem;
+  margin: 0;
+}
+
+/*-------------------------------------------------------------------
+  # FILTERS SECTION - COMPACT LAYOUT
+-------------------------------------------------------------------*/
+
+.filters-section {
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  background-color: color-mix(in srgb, var(--color-card-background) 40%, transparent); /* Semi-transparent surface tone */
+  backdrop-filter: blur(8px); /* Adds a slight blur effect */
+  padding: 10px;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.2); /* Keeps filters readable */
+}
+
+/* Filters Section */
+.filters {
+  display: grid;
+  grid-template-columns: minmax(200px, 240px) 1fr;
+  align-items: flex-start;
+  padding: 15px;
+  background-color: var(--timberwolf); /* Timberwolf background */
+  border-radius: 8px;
+  width: 100%;
+  column-gap: 24px;
+  row-gap: 20px;
+  transition: all 0.3s ease; /* Smooth transition */
+  z-index: -1;
+}
+
+.filter-toggle-list {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 12px;
+}
+
+.filter-toggle-row {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  gap: 10px;
+  padding: 8px 12px;
+  background-color: color-mix(in srgb, var(--color-card-background) 75%, transparent);
+  border-radius: 8px;
+  border: 1px solid color-mix(in srgb, var(--offblack) 8%, transparent);
+}
+
+.filter-toggle-row--disabled {
+  opacity: 0.6;
+}
+
+.filter-toggle-name {
+  flex: 1 1 auto;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--offblack);
+}
+
+.filter-card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 20px;
+  width: 100%;
+}
+
+/* Dedicated styles for venue tags removed in favor of shared checkbox styling */
+
+.venue-filter-card .filter-options {
+  padding-top: 4px;
+}
+
+.venue-filter-card .venue-tags {
+  justify-content: flex-start;
+}
+
+/* Each filter group */
+.filter-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px 14px;
+  background-color: color-mix(in srgb, var(--color-card-background) 85%, transparent);
+  border-radius: 10px;
+  border: 1px solid color-mix(in srgb, var(--offblack) 12%, transparent);
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.06);
+}
+
+.filter-card-title {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  color: var(--offblack);
+}
+
+.filter-group.filter-group--empty {
+  display: none;
+}
+
+/* Filter Headings */
+.filter-group h3 {
+  font-size: 16px;
+  font-weight: 600;
+  margin: 0;
+  text-align: left;
+}
+
+.filter-toggle {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  width: 44px;
+  height: 22px;
+  flex-shrink: 0;
+}
+
+.filter-toggle input {
+  opacity: 0;
+  width: 0;
+  height: 0;
+}
+
+.filter-toggle-slider {
+  position: absolute;
+  cursor: pointer;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: color-mix(in srgb, var(--offblack) 18%, transparent);
+  border: 1px solid color-mix(in srgb, var(--offblack) 28%, transparent);
+  border-radius: 9999px;
+  transition: background-color 0.2s ease, box-shadow 0.2s ease, border-color 0.2s ease;
+}
+
+.filter-toggle-slider::before {
+  position: absolute;
+  content: "";
+  height: 18px;
+  width: 18px;
+  left: 2px;
+  bottom: 2px;
+  background-color: var(--contrast-color);
+  border-radius: 50%;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  transition: transform 0.2s ease;
+}
+
+.filter-toggle input:checked + .filter-toggle-slider {
+  background-color: var(--tangerine);
+  border-color: var(--tangerine);
+}
+
+.filter-toggle input:focus-visible + .filter-toggle-slider {
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--accent-color) 35%, transparent);
+}
+
+.filter-toggle input:checked + .filter-toggle-slider::before {
+  transform: translateX(22px);
+}
+
+.filter-group--collapsed {
+  display: none;
+}
+
+/* Collapsed filters are hidden */
+.filters.collapsed {
+  display: none;
+}
+
+
+
+
+/* Additional styling for filter options and checkboxes (keep unchanged) */
+.filter-options {
+  display: flex;
+  flex-direction: column;
+  max-height: 150px;
+  overflow-y: auto;
+  overflow-x: hidden;
+  padding: 5px;
+  border: 1px solid var(--grey);
+  border-radius: 5px;
+  background: color-mix(in srgb, var(--color-card-background) 80%, transparent);
+}
+
+@media (max-width: 900px) {
+  .filters {
+    grid-template-columns: 1fr;
+  }
+
+  .filter-toggle-list {
+    order: -1;
+  }
+}
+
+/* Adjusting checkbox and other option styles (keep unchanged) */
+.filter-options input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  min-width: 18px;
+  min-height: 18px;
+  flex: 0 0 18px;
+  margin-right: 0;
+  appearance: none;
+  border: 0.5px solid var(--grey);
+  border-radius: 3px;
+  background-color: var(--timberwolf);
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  transition: all 0.2s ease-in-out;
+  box-sizing: border-box;
+}
+
+.filter-options label {
+  display: flex;
+  align-items: center;
+  font-size: 14px;
+  color: var(--grey);
+  cursor: pointer;
+  gap: 8px;
+}
+
+.filter-option-text {
+  flex: 1 1 auto;
+  min-width: 0;
+  font-size: 14px;
+  line-height: 1.5;
+  white-space: nowrap;
+}
+
+.testing {
+  color: red;
+  background-color: yellow;
+}
+
+.filter-options .filter-count {
+  flex: 0 0 auto;
+  font-weight: 300;
+  color: var(--grey);
+  font-size: 0.9em;
+  transition: color 0.3s ease-in-out;
+}
+
+/* Ensure the text color is greyed out */
+.disabled-filter {
+  color: grey !important;  /* Make text grey */
+  opacity: 0.75 !important; /* Reduce opacity */
+}
+
+/* Ensure disabled checkboxes cannot be clicked */
+.disabled-filter input[type="checkbox"] {
+  pointer-events: none; /* Prevent clicks */
+  opacity: 1.0; /* Slight transparency */
+}
+
+
+
+/* When Checkbox is Checked */
+.filter-options input[type="checkbox"]:checked + span {
+  color: var(--sienna);
+  font-weight: 600;
+}
+
+.filter-options input[type="checkbox"]:checked + span + .filter-count {
+  color: var(--sienna);
+  font-weight: 600;
+}
+
+.filter-options input[type="checkbox"]:checked {
+  background-color: var(--sienna);
+  border-color: var(--sienna);
+}
+
+/* Checkmark Effect */
+.filter-options input[type="checkbox"]::after {
+  content: "";
+  position: absolute;
+  left: 5px;
+  top: 2px;
+  width: 6px;
+  height: 12px;
+  border: solid white;
+  border-width: 0 1px 1px 0;
+  transform: rotate(45deg);
+  opacity: 0;
+  transition: opacity 0.2s ease-in-out;
+}
+
+/* Show Checkmark When Checked */
+.filter-options input[type="checkbox"]:checked::after {
+  opacity: 1;
+}
+
+/* Hover Effect */
+.filter-options input[type="checkbox"]:hover {
+  background-color: color-mix(in srgb, var(--timberwolf) 50%, white 10%);
+  border-color: var(--sienna);
+}
+
+/* Focus State for Accessibility */
+.filter-options input[type="checkbox"]:focus {
+  outline: 1px solid var(--sienna);
+}
+
+
+
+/* Button Container - Holds Reset & Toggle Buttons */
+.filter-controls {
+  display: flex;
+  width: 100%;
+  gap: 10px; /* Space between buttons */
+  margin-bottom: 10px; /* Space below buttons */
+  justify-content: space-between; /* Make sure buttons take up half the width each */
+  z-index: 2;
+}
+
+/* Buttons for Reset & Toggle Filters */
+.filter-button {
+  flex: 1; /* Ensures each button takes up half of the container width */
+  background-color: var(--sienna);
+  color: white;
+  border: 2px solid var(--sienna);
+  padding: 10px 15px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  text-align: center;
+  width: 48%; /* Ensure buttons fit within container */
+  white-space: nowrap; /* Prevent text from wrapping */
+}
+
+.filter-button:hover {
+  background-color: color-mix(in srgb, var(--sienna) 80%, var(--timberwolf) 20%);
+  border-color: var(--sienna);
+  color: white;
+}
+
+.filter-button:focus {
+  outline: 2px solid var(--sienna);
+  outline-offset: 2px;
+}
+
+#toggle-filters i {
+  margin-right: 10px; /* Space between the text and the icon */
+  transition: transform 0.3s ease-in-out;
+}
+
+#toggle-filters.collapsed i {
+  transform: rotate(180deg); /* Flip the icon when collapsed */
+}
+
+
+.reset-button {
+  background-color: var(--sienna);
+  color: white;
+  border: 2px solid var(--sienna);
+  padding: 10px 20px;
+  font-size: 16px;
+  font-weight: bold;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
+  margin-top: 10px;
+}
+
+.reset-button:hover {
+  background-color: color-mix(in srgb, var(--sienna) 80%, var(--timberwolf) 20%);
+  border-color: var(--sienna);
+  color: white;
+}
+
+.reset-button:focus {
+  outline: 2px solid var(--sienna);
+  outline-offset: 2px;
+}
+
+
+/*-------------------------------------------------------------------
+  # DATABASE CONTAINER
+-------------------------------------------------------------------*/
+
+.database-container {
+  background: var(--background-color);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.15);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+  /* text-align: center; */
+}
+
+.articles-header {
+/* align-content: center; */
+text-align: center;
+padding-bottom: 10px;
+}
+
+/* Cards Layout */
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  justify-content: center;
+}
+
+/* Cards grid layout */
+#database-cards {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+/* Strict card sizing */
+.database-card {
+  width: 100%;
+  min-width: 300px;
+  max-width: 400px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  background: var(--color-card-background);
+  padding: 10px;
+  border-radius: 8px;
+  box-shadow: 0px 3px 6px rgba(0, 0, 0, 0.3);
+  border: 0.5px solid var(--grey);
+  transition: 
+    transform 0.2s ease-in-out, 
+    box-shadow 0.2s ease-in-out,
+    grid-column 0.2s,
+    background-color 0.2s;
+  text-decoration: none;
+  color: inherit;
+  cursor: pointer;
+  position: relative;
+}
+
+/* Only the expanded card stretches across the row, but stays within the grid container */
+.database-card.card-expanded {
+  grid-column: 1 / -1;
+  width: 100%;
+  max-width: 100%; /* Fill the grid container, not the viewport */
+  min-width: 0;
+  z-index: 10;
+  transform: none; /* No scale by default */
+  box-shadow: 0px 8px 24px rgba(0,0,0,0.25);
+  background-color: var(--color-card-background); /* Match normal card background */
+}
+
+/* HOVER EFFECT for all cards, including expanded */
+.database-card:hover,
+.database-card.card-expanded:hover {
+  transform: translateY(-5px);
+  box-shadow: 0px 6px 12px rgba(0, 0, 0, 0.2);
+  background-color: color-mix(in srgb, var(--accent-color) 8%, var(--color-card-background) 92%);
+}
+
+
+/* Centered & Styled Title */
+.card-header {
+  display: grid;
+  grid-template-columns: auto 100px; /* Left column for heading, right for tags */
+  /* gap: 5px; */
+  /* margin:5px; */
+}
+
+/* DOI FLAG (Access Paper) */
+.doi-flag {
+  width: 100px;
+  height: 25px;
+  text-align: center;
+  background: color-mix(in srgb, var(--sienna) 60%, transparent);
+  color: var(--contrast-color);
+  /* padding: 4px 8px; */
+  font-size: 10px;
+  font-weight:bolder;
+  border-radius: 4px;
+  padding: 5px;
+  text-transform: uppercase;
+  margin: 0;
+  cursor: pointer;
+  text-decoration: underline;
+  outline: none;
+  /* Optional: visually indicate focus for accessibility */
+}
+.doi-flag:focus,
+.doi-flag:hover {
+  background: color-mix(in srgb, var(--sienna) 85%, transparent);
+  box-shadow: 0 0 0 2px var(--accent-color);
+}
+
+/* Prevent pointer events from bubbling up to the card */
+.doi-flag {
+  pointer-events: auto;
+  z-index: 20;
+  position: relative;
+}
+
+/* Author & Year (No Bold) */
+.card-meta {
+  font-size: 11px;
+  font-weight: 500;
+  font-style: normal;
+  color: var(--grey);
+  margin: 0;
+  padding: 0;
+  line-height: 1.4;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.card-meta-venue {
+  font-style: italic;
+}
+
+/* Centered & Styled Title */
+.card-title {
+  font-size: 15px;
+  font-weight: 500;
+  text-align: center;
+  margin: 10px 0px;
+  line-height: 1.35;
+  color: var(--offblack);
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Open Sans', 'Helvetica Neue', sans-serif;
+}
+
+.card-abstract {
+  font-size: 12px;
+  color: var(--grey);
+  margin: 0 0 0.5rem 0;
+  line-height: 1.4;
+}
+
+.database-card.card-expanded .card-abstract {
+  display: none;
+}
+
+/*-------------------------------------------------------------------
+  # DATABASE CARD TAG STYLES (SMALLER & CLEANER)
+-------------------------------------------------------------------*/
+
+.card-tags {
+  padding: 6px 8px;
+}
+
+.card-tags div {
+  font-size: 12px;  /* Smaller font size for tag headings */
+  font-weight: normal; /* No bold */
+  margin-bottom: 3px;
+}
+
+
+/* Container for Each Tag Section */
+.tag-section {
+  display: grid;
+  grid-template-columns: 70px auto; /* Left column for heading, right for tags */
+  align-items: right; /* Align heading to first tag */
+  gap: 10px;
+  margin-bottom: 8px; /* Space between sections */
+}
+
+/* Headings (Left Column) */
+.tag-heading {
+  font-size: xx-small; /* Smaller text */
+  font-weight: 100;
+  font-style: italic;
+  text-align: right;
+  color: var(--grey);
+  white-space: nowrap;
+}
+
+/* Tags Container (Right Column) */
+.tag-container {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px;
+}
+
+/* Individual Tags */
+.tag {
+  display: inline-block;
+  background: var(--color-tag-background);
+  color: var(--charcoal);
+  font-size: 10px; /* Smaller text */
+  font-weight: 400;
+  padding: 3px 6px; /* Reduce padding */
+  border-radius: 3px;
+  margin: 1px; /* Reduce space between tags */
+  /* white-space: nowrap; */
+}
+
+.detail-heading {
+  font-size: xx-small; /* Smaller text */
+  font-weight: lighter;
+  font-style: italic;
+  text-align: right;
+  color: var(--charcoal);
+  white-space: nowrap;
+}
+
+.detail-value {
+  display: inline-block;
+  color: var(--charcoal);
+  font-size: 10px; /* Smaller text */
+  font-weight: 400;
+  padding: 3px 6px; /* Reduce padding */
+  border-radius: 3px;
+  margin: 1px; /* Reduce space between tags */
+}
+
+/*-------------------------------------------------------------------
+MOBILE SCREEN RESPONSIVENESS
+-------------------------------------------------------------------*/
+
+@media (max-width: 768px) {
+  .filters {
+    flex-direction: column;  /* Stack filter groups vertically on mobile */
+    gap: 10px;  /* Smaller gap between stacked filters */
+    transition: transform 0.3s ease-in-out, opacity 0.3s ease-in-out;
+    opacity: 1;  /* Make it visible by default */
+    z-index: 0;  /* Ensure filters are on top of other elements */
+  }
+
+  .filters.collapsed {
+    transform: translateY(-100%); /* Move the filters up out of view */
+    opacity: 0;  /* Fade them out */
+    z-index: -1; /* Keep the filters behind other elements when collapsed */
+  }
+
+  .filter-group {
+    width: 100%; /* Ensure each filter group takes up the full width */
+    z-index: 0; /* Ensure the filter groups remain in the correct stacking order */
+  }
+
+  .filter-group h3 {
+      margin-bottom: 5px; /* Reduce spacing below filter headings */
+      font-size: 14px; /* Slightly smaller text */
+  }
+
+  .filter-options  {
+      max-height: 120px; /* Slightly smaller to save space */
+      padding: 4px;
+      font-size: 10px;
+      display: grid;  
+      /* Use grid for multi-column layout */
+      grid-template-columns: repeat(2, 1fr);  /* Create 2 equal-width columns */
+  }
+
+  .filter-controls {
+    z-index: 1;  /* Higher than the filters */
+  }
+
+  #toggle-filters, #reset-filters {
+    z-index: 2; /* Ensure the buttons remain on top of the filters */
+  }
+  .filter-button {
+    font-size: 14px; /* Shrink font size */
+    padding: 8px 12px; /* Reduce padding */
+  }
+
+  .database-hero {
+    padding: 10px;  /* Reduced padding for small screens */
+    height: min-content;
+  }
+
+  .database-hero .hero-title {
+    font-size: 1.5rem;  /* Smaller font size on narrow screens */
+    line-height: 1.2;  /* Adjust line-height for smaller font size */
+  }
+
+  .database-hero .hero-subtitle {
+    font-size: 1rem;
+  }
+
+  .filter-options label {
+    font-size: 0.8rem;
+  }
+
+
+  .database-card {
+    width: auto;
+  }
+
+  .filter-options input[type="checkbox"] {
+    width: 14px;
+    height: 14px;
+  }
+}
+
+@media (max-width: 480px) {
+  .database-hero .container {
+    padding: 8px;  /* Even smaller padding */
+  }
+  .database-card {
+    width: auto;
+  }
+
+  .database-hero .hero-title {
+    font-size: 1.25rem;  /* Even smaller font size */
+    line-height: 1.2;
+  }
+
+  .database-hero .hero-subtitle {
+    font-size: 0.95rem;
+  }
+  .filter-options input[type="checkbox"] {
+    width: 12px;
+    height: 12px;
+  }
+
+  .filter-options  {
+    /* Use grid for multi-column layout */
+    grid-template-columns: repeat(1, 1fr);  /* Create 2 equal-width columns */
+}
+}
+
+
+/* Ensure content scales on large screens */
+@media (min-width: 1200px) {
+  .database-card {
+    width: auto;
+  }
+
+  .filter-options input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+  }
+
+}
+
+/* Expanded details section */
+.expanded-details {
+  display: none;
+  margin-top: 1rem;
+  padding: 1rem;
+  background: rgba(0,0,0,0.06);
+  border-radius: 6px;
+  font-size: 0.98em;
+  color: var(--offblack);
+  box-shadow: 0 2px 8px rgba(0,0,0,0.06);
+  animation: fadeIn 0.3s;
+}
+
+.database-card.card-expanded .expanded-details {
+  display: block;
+}
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(10px);}
+  to { opacity: 1; transform: translateY(0);}
+}
+
+.detail-text .tag-container {
+  display: block;
+  font-size: 11px;
+  line-height: 1.4;
+  color: var(--offblack);
+}
+
+.no-results {
+  text-align: center;
+  padding: 2rem 1rem;
+  color: var(--grey);
+  font-size: 0.95rem;
+}
+
+/* Add Article Button */
+.add-article-btn {
+  position: absolute;
+  top: 1.5rem;
+  right: 1.5rem;
+  background: var(--accent-color);
+  color: var(--contrast-color);
+  border: none;
+  border-radius: 7px;
+  padding: 6px 18px;
+  font-size: 0.95rem;
+  font-family: var(--default-font, Arial, sans-serif);
+  font-weight: 500;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.07);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s, opacity 0.2s;
+  z-index: 10;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+}
+.add-article-btn:hover,
+.add-article-btn:focus {
+  opacity: 0.85;
+  background: color-mix(in srgb, var(--accent-color) 85%, white 15%);
+  box-shadow: 0 4px 12px rgba(0,0,0,0.12);
+  outline: none;
+}
+
+.add-article-btn .add-article-text {
+  display: inline;
+}
+
+@media (max-width: 600px) {
+  .add-article-btn .add-article-text {
+    display: none;
+  }
+  .add-article-btn {
+    padding: 6px 10px;
+    min-width: 0;
+  }
+}
