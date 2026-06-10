@@ -8,28 +8,28 @@
   },
   "filters": {
     "filter1": {
-      "label": "Theory"
+      "label": "Setting"
     },
     "filter2": {
-      "label": "Method"
+      "label": "Population"
     },
     "filter3": {
-      "label": "Pedagogy / Instruction"
+      "label": "Theory"
     },
     "filter4": {
       "label": "Population"
     },
     "filter5": {
-      "label": "Setting"
+      "label": ""
     },
     "filter6": {
-      "label": "Subject / Content Area"
+      "label": ""
     },
     "filter7": {
-      "label": "Technologies"
+      "label": ""
     },
     "filter8": {
-      "label": "Construct"
+      "label": ""
     },
     "decadePublished": {
       "label": "Decade Published"
